@@ -1,8 +1,8 @@
 import random as rd
 
-# Please go to line 480 to skip the word dictionary list, the script begin on line 480
+# Please go to line 482 to skip the word dictionary list, the script begin on line 482
 
-# Init game
+# Init the game with our word bank
 word_bank = """Adult
 
 Aeroplane
@@ -474,7 +474,9 @@ Woman
 Worm
 
 X-ray"""
+# Convert our word bank into a list
 word_bank = list(word_bank.split("\n\n"))
+# Shuffle our words.
 rd.shuffle(word_bank)
 
 # Welcome message
