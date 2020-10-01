@@ -17,7 +17,7 @@ while True:
             print("Fraction undefined")
         elif n == 0:
             # If numerator 0, it will always be 0
-            print("Your reduced fraction is 0")
+            print(f"Your reduced fraction of {n}/{d} is 0")
         else:
             # Get the gcd of the numerator and the denominator
             gcd = euclidean_gcd(n, d)
@@ -28,10 +28,10 @@ while True:
             if reduced_n == n and reduced_d == d:
                 # If denominator is 1, return the numerator
                 if d == 1:
-                    print(f"{n}/{d} is already in the simplest form. It is {int(n)}")
+                    print(f"{n}/{d} is already in the simplest(reduced) form. It is {int(n)}")
                 # Return the simplest form and it is not divisible by the denominator.
                 else:
-                    print(f"{n}/{d} is already in the simplest form.")
+                    print(f"{n}/{d} is already in the simplest(reduced) form.")
             else:
                 # If the fraction divides perfectly, return a number
                 if reduced_n % reduced_d == 0:
