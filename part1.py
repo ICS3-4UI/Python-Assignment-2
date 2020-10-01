@@ -6,9 +6,10 @@ def euclidean_gcd(int1, int2): return int1 if not int2 else euclidean_gcd(int2, 
 
 
 # Infinite loop to repeatedly get user input with no exit condition
-while (True):
+while True:
     # Get user input
     try:
+        # a and b is the same as n and d
         n = int(input("Numerator: "))
         d = int(input("Denominator: "))
         if d == 0:
@@ -28,7 +29,7 @@ while (True):
                 # If denominator is 1, return the numerator
                 if d == 1:
                     print(f"{n}/{d} is already in the simplest form. It is {int(n)}")
-                # The simplest form
+                # Return the simplest form and it is not divisible by the denominator.
                 else:
                     print(f"{n}/{d} is already in the simplest form.")
             else:
@@ -41,5 +42,3 @@ while (True):
                         f"The reduced fraction of {n}/{d} is {int(reduced_n)}/{int(reduced_d)}")
     except ValueError:
         print("Not valid at all! >:(")
-
-
