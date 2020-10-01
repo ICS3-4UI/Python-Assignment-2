@@ -511,41 +511,46 @@ while game_count > 0:
     print(f"\nRound {the_current_round}: \n")
     # Let user decide on a word length
     while True:
-        userDecideWordLength = str(input(
-            f"Okay {name}, would you like to decide on a word length? (Y/N) >> ")).upper()
+        userDecideWordLength = str(input(f"Okay {name}, would you like to decide on a word length? (Y/N) >> ")).upper()
         if userDecideWordLength != "Y":
             if userDecideWordLength.upper() == "N":
+                # Convert to a boolean of false if input is N
                 userDecideWordLength = False
                 break
             else:
-                print(
-                    f"Hello {name}, I don't know what you want, can you input again?")
+                # Neither Y or N
+                print(f"Hello {name}, I don't know what you want, can you input again?")
         else:
+            # Y means True
             userDecideWordLength = True
             break
-    # Let the user decide a word length.
+
+    # Let the user decide a word length, if they asked for it.
     if userDecideWordLength:
         while True:
             try:
-                length = int(
-                    input(f"Okay {name}, Please enter your desired word length >> "))
+                length = int(input(f"Okay {name}, Please enter your desired word length >> "))
                 break
             except ValueError:
                 print("Not a valid input, please try again!")
     else:
         # Generate a random word length
-        print(
-            f"That's fine {name}. It's hard for me to decide too, but I think I've got it.")
+        print(f"That's fine {name}. It's hard for me to decide too, but I think I've got it.")
         length = rd.randint(1, 10)
     # Filter all words in word bank that matches our length
     word = [w for w in word_bank if len(w) == length]
 
-    # If word length is too big or too small, no word was found match, user input length again.
+    # If word length is too big or too small, no word matched, user have to input length again.
     while not word:
-        print("No word found in the word bank. Please enter another desired length")
-        length = int(
-            input(f"Okay {name}, Please enter your desired word length (again) >> "))
-        word = [w for w in word_bank if len(w) == length]
+        # Keep trying if the user enters invalid input or no match again.
+        while True:
+            try:
+                print("No word found in the word bank. Please enter another desired length")
+                length = int(input(f"Okay {name}, Please enter your desired word length (again) >> "))
+                word = [w for w in word_bank if len(w) == length]
+                break
+            except ValueError:
+                print("Nope, try again!")
 
     # Select a random word from our filtered list.
     word = rd.choice(word).lower().strip().replace("-", " ")
@@ -570,8 +575,7 @@ while game_count > 0:
                 fail_count += 1
 
         if fail_count == 0:
-            print(
-                f"\nCongratulations, you win! The word is \"{word.capitalize()}\", it took you {guess_count} tries.")
+            print(f"\nCongratulations, you win! The word is \"{word.capitalize()}\", it took you {guess_count} tries.")
             game_count -= 1
             all_guess_count.append(guess_count)
             break
@@ -605,8 +609,7 @@ while game_count > 0:
 
     # The user finished all of their rounds.
     if game_count == 0:
-        print(
-            f"\nYou finished all of your rounds. Your average was guess per round was {int(getAverage(all_guess_count))}.\n")
+        print(f"\nYou finished all of your rounds. Your average was guess per round was {int(getAverage(all_guess_count))}.\n")
 
 # Goodbye message
 print("\nPlay again to improve your score!")
