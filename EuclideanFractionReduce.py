@@ -38,7 +38,7 @@ while True:
                     print(f"The reduced fraction of {n}/{d} is {int(reduced_n / reduced_d)}")
                 # Fraction will be a decimal when divided, return the reduced fraction
                 else:
-                    print(
-                        f"The reduced fraction of {n}/{d} is {int(reduced_n)}/{int(reduced_d)}")
+                    print(f"The reduced fraction of {n}/{d} is {int(reduced_n)}/{int(reduced_d)}")
     except ValueError:
+        # Avoid invalid input that aren't a number
         print("Not valid at all! >:(")
