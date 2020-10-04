@@ -573,9 +573,14 @@ while game_count > 0:
     turns = 12
 
     while turns > 0:
+        print("\n")
+
         fail_count = 0
+
+        # Separate the word by letter
         for char in word:
             if char in all_guesses:
+                # If match, replace with the letter
                 print(char, end="")
             else:
                 print("_", end="")
@@ -590,9 +595,10 @@ while game_count > 0:
             break
 
         guess_char = str(input(f"\nGuess {guess_count + 1} >> "))
+
         if guess_char in all_guesses:
             # If the user guessed the same char before
-            print("You've already guessed this letter, try something else.")
+            print("You've already guessed this letter, try something else.\n")
         else:
             guess_count += 1
 
@@ -604,19 +610,23 @@ while game_count > 0:
                     f"that, and it is ... \"{guess_char}\"")
 
             # Append our letter to every letters we've guessed so so far
-            all_guesses += guess_char
+            all_guesses += guess_char.lower()
 
             # Print a message based-on if used guessed a correct letter or not
             if guess_char not in word:
                 turns -= 1
                 print("Wrong haha")
-                print(f"{name}, you have {turns} turns left.")
+                # Plural or singular check
+                turn_turns = ["turn", "turns"]
+                print(f"{name}, you have {turns} {turn_turns[0] if turns == 1 else turn_turns[1]} left.")
                 if turns == 0:
                     # User ran out of turns and has not guessed every character
                     print(f"You lost, the word was \"{word.capitalize()}\"")
                     game_count -= 1
                     all_guess_count.append(guess_count)
                     break
+            else:
+                print(f"Nice one {name}, you've found a correct letter!")
 
     # The user finished all of their rounds.
     if game_count == 0:
