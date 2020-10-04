@@ -503,7 +503,6 @@ while True:
         print(f"Not valid input, please try again {name}.")
 
 # A list to store guess count for every game
-
 all_guess_count = []
 the_current_round = 0
 
