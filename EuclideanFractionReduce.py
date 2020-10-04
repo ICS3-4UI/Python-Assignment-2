@@ -16,7 +16,7 @@ while True:
             # Undefined if denominator is 0
             print("Fraction undefined")
         elif n == 0:
-            # If numerator 0, it will always be 0
+            # If numerator is 0, it will always be 0
             print(f"Your reduced fraction of {n}/{d} is 0")
         else:
             # Get the gcd of the numerator and the denominator
