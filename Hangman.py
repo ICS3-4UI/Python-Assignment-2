@@ -490,12 +490,12 @@ def getAverage(l):
     return sum(l) / len(l)
 
 
-def caesar_encrypt(input, shift):
-    input = input.lower()
+def caesar_encrypt(inp, shift):
+    inp = inp.lower()
     letters = string.ascii_lowercase
     letters_shifted = letters[shift:] + letters[:shift]
     table = str.maketrans(letters, letters_shifted)
-    return input.translate(table)
+    return inp.translate(table)
 
 
 # Welcome message
