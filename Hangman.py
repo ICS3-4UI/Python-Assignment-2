@@ -478,6 +478,10 @@ X-ray"""
 word_bank = list(word_bank.split("\n\n"))
 # Shuffle our words.
 rd.shuffle(word_bank)
+# Essential function to find the average guess for all round
+def getAverage(l):
+    return sum(l) / len(l)
+
 
 # Welcome message
 print("Welcome to Hangman! You have to guess a word letter by letter")
@@ -495,11 +499,6 @@ while True:
         break
     except ValueError:
         print(f"Not valid input, please try again {name}.")
-
-
-def getAverage(l):
-    return sum(l) / len(l)
-
 
 # A list to store guess count for every game
 
@@ -533,6 +532,7 @@ while game_count > 0:
     # Let the user decide a word length, if they asked for it.
     if userDecideWordLength:
         while True:
+            # Avoid invalid input
             try:
                 length = int(input(f"Okay {name}, Please enter your desired word length >> "))
                 break
@@ -541,14 +541,15 @@ while game_count > 0:
     else:
         # Generate a random word length
         print(f"That's fine {name}. It's hard for me to decide too, but I think I've got it.")
-        length = rd.randint(3, 10)
+        length = rd.randint(3, 13)
     # Filter all words in word bank that matches our length
     word = [w for w in word_bank if len(w) == length]
 
-    # If word length is too big or too small, no word matched, user have to input length again.
+    # If word length is too big or too small, no word matched from the word bank, user have to input length again.
     while not word:
         # Keep trying if the user enters invalid input or no match again.
         while True:
+            # Avoid invalid input
             try:
                 print("No word found in the word bank. Please enter another desired length")
                 length = int(input(f"Okay {name}, Please enter your desired word length (again) >> "))
@@ -560,14 +561,14 @@ while game_count > 0:
     # Select a random word from our filtered list.
     word = rd.choice(word).lower().strip().replace("-", " ")
 
-    print(
-        f"\nI know the word now, it is your turn to guess. Good luck {name}!")
+    print(f"\nI know the word now, it is your turn to guess. Good luck {name}!")
 
+    # store all guessed chars
     all_guesses = ''
+    # amount of guess
     guess_count = 0
 
-    # Turns we give the user
-    # You may adjust this
+    # Turns we give the user, you may adjust this
     turns = 12
 
     while turns > 0:
@@ -581,12 +582,15 @@ while game_count > 0:
 
         if fail_count == 0:
             print(f"\nCongratulations, you win! The word is \"{word.capitalize()}\", it took you {guess_count} tries.")
+            # Finished the round, go to next round
             game_count -= 1
+            # Append the guess count from this round to the total guess count, so we can calculate the average in the end.
             all_guess_count.append(guess_count)
             break
 
         guess_char = str(input(f"\nGuess {guess_count + 1} >> "))
         if guess_char in all_guesses:
+            # If the user guessed the same char before
             print("You've already guessed this letter, try something else.")
         else:
             guess_count += 1
@@ -596,7 +600,7 @@ while game_count > 0:
                 guess_char = rd.choice(guess_char)
                 print(
                     f"I see multiple entries, nice try, the game doesn't work this way, I am taking a random letter from "
-                    f"that, and it is ... {guess_char}")
+                    f"that, and it is ... \"{guess_char}\"")
 
             # Append our letter to every letters we've guessed so so far
             all_guesses += guess_char
@@ -607,6 +611,7 @@ while game_count > 0:
                 print("Wrong haha")
                 print(f"{name}, you have {turns} turns left.")
                 if turns == 0:
+                    # User ran out of turns and has not guessed every character
                     print(f"You lost, the word was \"{word.capitalize()}\"")
                     game_count -= 1
                     all_guess_count.append(guess_count)
