@@ -490,6 +490,7 @@ def getAverage(l):
     return sum(l) / len(l)
 
 
+# Caesar shift function for intense mode
 def caesar_encrypt(inp, shift):
     inp = inp.lower()
     letters = string.ascii_lowercase
@@ -499,7 +500,7 @@ def caesar_encrypt(inp, shift):
 
 
 # Welcome message
-print("Welcome to Hangman! You have to guess a word letter by letter")
+print("Welcome to Hangman! You have to guess a word letter by letter.")
 print("You also have the option for an intense mode, trust me, you won't win.")
 print("\n" + "First, let me know your name so I know how to address you.")
 
@@ -577,24 +578,24 @@ while game_count > 0:
     word = rd.choice(word).lower().strip().replace("-", " ")
 
     while True:
-        extremelevel = str(input("Would like to try an intense level? Where the word will be caesar shifted by today's day? (Y/N) >> ")).upper()
-        if extremelevel != "Y":
-            if extremelevel == "N":
+        extreme_mode = str(input("Would like to try an intense level? Where the word will be caesar shifted by today's day? (Y/N) >> ")).upper()
+        if extreme_mode != "Y":
+            if extreme_mode == "N":
                 # Convert to a boolean of false if input is N
-                extremelevel = False
+                extreme_mode = False
                 break
             else:
                 # Neither Y or N
                 print(f"Hello {name}, I don't know what you want, can you input again?")
         else:
             # Y means True
-            extremelevel = True
+            extreme_mode = True
             break
 
     # We will use today's day as the key for Caesar cipher.
     today_day = datetime.datetime.today().day
 
-    if extremelevel:
+    if extreme_mode:
         key = today_day
         word = caesar_encrypt(word, key)
 
@@ -623,10 +624,15 @@ while game_count > 0:
                 fail_count += 1
 
         if fail_count == 0:
+            # Show the original word even if the word decrypted.
+            # Decrypt the word by setting the key as negative.
             wordtype = [word.capitalize(), caesar_encrypt(word, -today_day).capitalize()]
-            print(f"\nCongratulations, you win! The word is \"{wordtype[1] if extremelevel else wordtype[0]}\", it took you {guess_count} tries.")
+
+            print(f"\nCongratulations, you win! The word is \"{wordtype[1] if extreme_mode else wordtype[0]}\", it took you {guess_count} tries.")
+
             # Finished the round, go to next round
             game_count -= 1
+
             # Append the guess count from this round to the total guess count, so we can calculate the average in the end.
             all_guess_count.append(guess_count)
             break
@@ -653,13 +659,19 @@ while game_count > 0:
             if guess_char not in word:
                 turns -= 1
                 print("Wrong haha")
+
                 # Plural or singular check
                 turn_turns = ["turn", "turns"]
                 print(f"{name}, you have {turns} {turn_turns[0] if turns == 1 else turn_turns[1]} left.")
+
                 if turns == 0:
                     # User ran out of turns and has not guessed every character
+
+                    # Show the original word even if the word decrypted.
+                    # Decrypt the word by setting the key as negative.
                     wordtype = [word.capitalize(), caesar_encrypt(word, -today_day).capitalize()]
-                    print(f"You lost, the word was \"{wordtype[1] if extremelevel else wordtype[0]}\"")
+
+                    print(f"You lost, the word was \"{wordtype[1] if extreme_mode else wordtype[0]}\"")
                     game_count -= 1
                     all_guess_count.append(guess_count)
                     break
