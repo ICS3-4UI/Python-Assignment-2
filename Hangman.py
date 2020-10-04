@@ -506,9 +506,14 @@ def getAverage(l):
 all_guess_count = []
 the_current_round = 0
 
+original_game_count = game_count
+
 while game_count > 0:
     the_current_round += 1
-    print(f"\nRound {the_current_round}: \n")
+    if the_current_round != original_game_count:
+        print(f"\nRound {the_current_round} \n")
+    else:
+        print(f"\nRound {the_current_round} (Last Round) \n")
     # Let user decide on a word length
     while True:
         userDecideWordLength = str(input(f"Okay {name}, would you like to decide on a word length? (Y/N) >> ")).upper()
@@ -536,7 +541,7 @@ while game_count > 0:
     else:
         # Generate a random word length
         print(f"That's fine {name}. It's hard for me to decide too, but I think I've got it.")
-        length = rd.randint(1, 10)
+        length = rd.randint(3, 10)
     # Filter all words in word bank that matches our length
     word = [w for w in word_bank if len(w) == length]
 
