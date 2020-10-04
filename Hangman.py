@@ -1,8 +1,13 @@
 import random as rd
+import datetime
+import string
+import datetime
 
 # Please go to line 482 to skip the word dictionary list, the script begin on line 482
 
 # Init the game with our word bank
+
+
 word_bank = """Adult
 
 Aeroplane
@@ -271,7 +276,7 @@ Milkshake
 
 Mist
 
-Money $$$$
+Money
 
 Monster
 
@@ -483,6 +488,12 @@ rd.shuffle(word_bank)
 # Essential function to find the average guess for all round
 def getAverage(l):
     return sum(l) / len(l)
+def caesar_encrypt(input, shift):
+    input = input.lower()
+    letters = string.ascii_lowercase
+    letters_shifted = letters[shift:] + letters[:shift]
+    table = str.maketrans(letters, letters_shifted)
+    return input.translate(table)
 
 
 # Welcome message
@@ -518,7 +529,7 @@ while game_count > 0:
     while True:
         userDecideWordLength = str(input(f"Okay {name}, would you like to decide on a word length? (Y/N) >> ")).upper()
         if userDecideWordLength != "Y":
-            if userDecideWordLength.upper() == "N":
+            if userDecideWordLength == "N":
                 # Convert to a boolean of false if input is N
                 userDecideWordLength = False
                 break
@@ -562,6 +573,26 @@ while game_count > 0:
     # Select a random word from our filtered list.
     word = rd.choice(word).lower().strip().replace("-", " ")
 
+    while True:
+        extremelevel = str(input("Would like to try an intense level? Where the word will be caesar shifted by today's day? (Y/N) >> ")).upper()
+        if extremelevel != "Y":
+            if extremelevel == "N":
+                # Convert to a boolean of false if input is N
+                extremelevel = False
+                break
+            else:
+                # Neither Y or N
+                print(f"Hello {name}, I don't know what you want, can you input again?")
+        else:
+            # Y means True
+            extremelevel = True
+            break
+
+    if extremelevel:
+        key = datetime.datetime.today().day
+        word = caesar_encrypt(word, key)
+
+
     print(f"\nI know the word now, it is your turn to guess. Good luck {name}!")
 
     # store all guessed chars
@@ -587,7 +618,8 @@ while game_count > 0:
                 fail_count += 1
 
         if fail_count == 0:
-            print(f"\nCongratulations, you win! The word is \"{word.capitalize()}\", it took you {guess_count} tries.")
+            wordtype = [word.capitalize(), caesar_encrypt(word, -datetime.datetime.today().day).capitalize()]
+            print(f"\nCongratulations, you win! The word is \"{wordtype[1] if extremelevel else wordtype[0]}\", it took you {guess_count} tries.")
             # Finished the round, go to next round
             game_count -= 1
             # Append the guess count from this round to the total guess count, so we can calculate the average in the end.
@@ -621,7 +653,8 @@ while game_count > 0:
                 print(f"{name}, you have {turns} {turn_turns[0] if turns == 1 else turn_turns[1]} left.")
                 if turns == 0:
                     # User ran out of turns and has not guessed every character
-                    print(f"You lost, the word was \"{word.capitalize()}\"")
+                    wordtype = [word.capitalize(), caesar_encrypt(word, -datetime.datetime.today().day).capitalize()]
+                    print(f"You lost, the word was \"{wordtype[1] if extremelevel else wordtype[0]}\"")
                     game_count -= 1
                     all_guess_count.append(guess_count)
                     break
