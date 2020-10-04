@@ -478,6 +478,8 @@ X-ray"""
 word_bank = list(word_bank.split("\n\n"))
 # Shuffle our words.
 rd.shuffle(word_bank)
+
+
 # Essential function to find the average guess for all round
 def getAverage(l):
     return sum(l) / len(l)
