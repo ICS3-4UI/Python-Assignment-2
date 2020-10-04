@@ -488,6 +488,8 @@ rd.shuffle(word_bank)
 # Essential function to find the average guess for all round
 def getAverage(l):
     return sum(l) / len(l)
+
+
 def caesar_encrypt(input, shift):
     input = input.lower()
     letters = string.ascii_lowercase
@@ -498,7 +500,8 @@ def caesar_encrypt(input, shift):
 
 # Welcome message
 print("Welcome to Hangman! You have to guess a word letter by letter")
-print("First, let me know your name so I know how to address you.")
+print("You also have the option for an intense mode, trust me, you won't win.")
+print("\n" + "First, let me know your name so I know how to address you.")
 
 # Get user's name
 name = str(input("My name is >> "))
@@ -588,10 +591,12 @@ while game_count > 0:
             extremelevel = True
             break
 
-    if extremelevel:
-        key = datetime.datetime.today().day
-        word = caesar_encrypt(word, key)
+    # We will use today's day as the key for Caesar cipher.
+    today_day = datetime.datetime.today().day
 
+    if extremelevel:
+        key = today_day
+        word = caesar_encrypt(word, key)
 
     print(f"\nI know the word now, it is your turn to guess. Good luck {name}!")
 
@@ -618,7 +623,7 @@ while game_count > 0:
                 fail_count += 1
 
         if fail_count == 0:
-            wordtype = [word.capitalize(), caesar_encrypt(word, -datetime.datetime.today().day).capitalize()]
+            wordtype = [word.capitalize(), caesar_encrypt(word, -today_day).capitalize()]
             print(f"\nCongratulations, you win! The word is \"{wordtype[1] if extremelevel else wordtype[0]}\", it took you {guess_count} tries.")
             # Finished the round, go to next round
             game_count -= 1
@@ -653,7 +658,7 @@ while game_count > 0:
                 print(f"{name}, you have {turns} {turn_turns[0] if turns == 1 else turn_turns[1]} left.")
                 if turns == 0:
                     # User ran out of turns and has not guessed every character
-                    wordtype = [word.capitalize(), caesar_encrypt(word, -datetime.datetime.today().day).capitalize()]
+                    wordtype = [word.capitalize(), caesar_encrypt(word, -today_day).capitalize()]
                     print(f"You lost, the word was \"{wordtype[1] if extremelevel else wordtype[0]}\"")
                     game_count -= 1
                     all_guess_count.append(guess_count)
