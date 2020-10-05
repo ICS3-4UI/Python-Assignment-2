@@ -510,7 +510,7 @@ name = str(input("My name is >> "))
 # Get game round count
 while True:
     try:
-        game_count = int(input(f"Okay {name}, how many round(s) of game would you like to play? >> "))
+        game_count = int(input(f"\nOkay {name}, how many round(s) of game would you like to play? >> "))
         round_or_rounds = ["round", "rounds"]
         print(f"I see, you want to play {game_count} {round_or_rounds[0] if game_count == 1 else round_or_rounds[1]}.")
         break
