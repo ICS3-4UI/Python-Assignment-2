@@ -578,7 +578,7 @@ while game_count > 0:
     word = rd.choice(word).lower().strip().replace("-", " ")
 
     while True:
-        extreme_mode = str(input("Would like to try an intense level? Where the word will be caesar shifted by today's day? (Y/N) >> ")).upper()
+        extreme_mode = str(input("Would like to try the intense mode? The word will be caesar shifted by today's day. (Y/N) >> ")).upper()
         if extreme_mode != "Y":
             if extreme_mode == "N":
                 # Convert to a boolean of false if input is N
