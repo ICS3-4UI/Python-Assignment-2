@@ -12,15 +12,18 @@ while True:
         # a and b is the same as n and d
         n = int(input("Numerator: "))
         d = int(input("Denominator: "))
+
         if d == 0:
             # Undefined if denominator is 0
             print("Fraction undefined")
+
         elif n == 0:
             # If numerator is 0, it will always be 0
             print(f"The reduced fraction of {n}/{d} is 0")
         else:
             # Get the gcd of the numerator and the denominator
             gcd = euclidean_gcd(n, d)
+
             # Get the reduced numerator and denominator by dividing by their GCD
             reduced_n, reduced_d = n / gcd, d / gcd
 
