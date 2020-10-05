@@ -521,6 +521,7 @@ while True:
 all_guess_count = []
 the_current_round = 0
 
+# Create a copy of this variable so it won't be decremented after a round finishes
 original_game_count = game_count
 
 while game_count > 0:
