@@ -620,7 +620,7 @@ while game_count > 0:
                 # If match, replace with the letter
                 print(char, end="")
             else:
-                print("_", end="")
+                print("\r".join("_"), end="")
                 fail_count += 1
 
         if fail_count == 0:
@@ -688,3 +688,6 @@ while game_count > 0:
 # Goodbye message
 print("\nPlay again to improve your score!")
 print(f"Goodbye {name}, it was nice to meet you, hopefully we will meet again!")
+
+# Prevent Python console from suddenly exiting without display the essential messages
+input("\nPress any key to exit...")
