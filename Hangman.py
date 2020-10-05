@@ -689,5 +689,5 @@ while game_count > 0:
 print("\nPlay again to improve your score!")
 print(f"Goodbye {name}, it was nice to meet you, hopefully we will meet again!")
 
-# Prevent Python console from suddenly exiting without display the essential messages
+# Prevent Python console from suddenly exiting without displaying the essential messages
 input("\nPress any key to exit...")
