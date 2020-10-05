@@ -21,7 +21,7 @@ while True:
         else:
             # Get the gcd of the numerator and the denominator
             gcd = euclidean_gcd(n, d)
-            # Get reduced numerator and denominator
+            # Get the reduced numerator and denominator by dividing by their GCD
             reduced_n, reduced_d = n / gcd, d / gcd
 
             # No change after dividing by the GCD, it is in the simplest form.
