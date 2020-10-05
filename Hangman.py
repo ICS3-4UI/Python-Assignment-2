@@ -577,6 +577,7 @@ while game_count > 0:
     # Select a random word from our filtered list.
     word = rd.choice(word).lower().strip().replace("-", " ")
 
+    # Extreme game mode selection
     while True:
         extreme_mode = str(input("Would like to try the intense mode? The word will be caesar shifted by today's day. (Y/N) >> ")).upper()
         if extreme_mode != "Y":
