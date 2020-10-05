@@ -628,7 +628,7 @@ while game_count > 0:
             # Decrypt the word by setting the key as negative.
             wordtype = [word.capitalize(), caesar_encrypt(word, -today_day).capitalize()]
 
-            # Using the ternary operator if the word has been encrypted, show decrypted, else show the word
+            # Using the ternary operator if the word has been encrypted, show decrypted, else show the original word
             print(f"\nCongratulations, you win! The word is \"{wordtype[1] if extreme_mode else wordtype[0]}\", it took you {guess_count} tries.")
 
             # Finished the round, go to next round
@@ -673,7 +673,7 @@ while game_count > 0:
                     # Decrypt the word by setting the key as negative.
                     wordtype = [word.capitalize(), caesar_encrypt(word, -today_day).capitalize()]
 
-                    # Using the ternary operator if the word has been encrypted, show decrypted, else show the word
+                    # Using the ternary operator if the word has been encrypted, show decrypted, else show the original word
                     print(f"You lost, the word was \"{wordtype[1] if extreme_mode else wordtype[0]}\"")
                     game_count -= 1
                     all_guess_count.append(guess_count)
