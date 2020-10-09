@@ -532,7 +532,7 @@ while game_count > 0:
         print(f"\nRound {the_current_round} (Last Round) \n")
     # Let user decide on a word length
     while True:
-        userDecideWordLength = str(input(f"Okay {name}, would you like to decide on a word length? (Y/N) >> ")).upper()
+        userDecideWordLength = str(input(f"Okay {name}, would you like to decide on a word length? (Y/N) >> ")).upper().strip()
         if userDecideWordLength != "Y":
             if userDecideWordLength == "N":
                 # Convert to a boolean of false if input is N
